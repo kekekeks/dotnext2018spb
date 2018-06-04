@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Ooui" Version="0.10.222" />
+    <PackageReference Include="Ooui.Forms" Version="0.10.222" />
+    <EmbeddedResource Include="**\*.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <PackageReference Include="PropertyChanged.Fody" Version="2.5.4" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
+  </ItemGroup>
+  <Target Name="Wut" BeforeTargets="CoreCompile">
+    <Message Importance="high" Text="WTF" />
+    <CallTarget Targets="XamlC" />
+  </Target>
+</Project>

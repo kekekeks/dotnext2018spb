@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Ooui.Shared.Forms.LoginView">
+
+    <StackLayout Padding="20">
+        <Label Text="Login" FontSize="32" />
+        <Entry Text="{Binding Login}"/>
+        <Label Text="Password" FontSize="32" />
+        <Entry IsPassword="True" Text="{Binding Password}"/>
+        <Button Text="Login" Command="{Binding DoLogin}" />
+    </StackLayout>
+</ContentView>

@@ -1,0 +1,27 @@
+@* type=react-component *@
+@* classname=RazorReact.MainView *@
+@using RazorReact
+@inherits RazorReact.RazorComponentBase<RazorReact.MainView.Props, RazorReact.MainView.State>
+@functions
+{
+    public class Props
+    {
+        
+    }
+    
+    public class State
+    {
+        public bool LoggedIn { get; set; }
+    }
+}
+@if (state?.LoggedIn == true)
+{
+    <div>Login successful</div>
+}
+else
+{
+    @(new LoginView(new LoginView.Props()
+      {
+          OnComplete = () => UpdateState(s=>s.LoggedIn = true)
+      }))
+}

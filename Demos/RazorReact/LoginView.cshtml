@@ -1,0 +1,44 @@
+@* type=react-component *@
+@* classname=RazorReact.LoginView *@
+@using System
+@using Bridge.Html5
+@using Bridge.React
+@inherits RazorReact.RazorComponentBase<RazorReact.LoginView.Props, RazorReact.LoginView.State>
+@functions
+{
+    public class Props
+    {
+        public Action OnComplete { get; set; }
+    }
+        
+    public class State
+    {
+        public string Login { get; set; }
+        public string Password { get; set; }
+        public string Message { get; set; }
+    }
+}
+
+<div>
+    <div>@(state?.Message)</div>
+    <label>Login</label>
+    <input className="form-control"
+           onChange="@Event(e => UpdateState(s => s.Login= e.CurrentTarget.As<HTMLInputElement>().Value))"/>
+    <label>Password</label>
+    <input className="form-control"
+           onChange="@Event(e => UpdateState(s => s.Password = e.CurrentTarget.As<HTMLInputElement>().Value))"/>
+    <button className="btn btn-primary"
+            style="@(new ReactStyle{MarginTop = "15px"})"
+            disabled="@(string.IsNullOrWhiteSpace(state?.Login) || string.IsNullOrWhiteSpace(state?.Password))"
+            onClick="@Event(e =>
+                     {
+                         if (state?.Login == "admin" && state?.Password == "123")
+                             props.OnComplete();
+                         else
+                             UpdateState(s =>
+                             {
+                                 s.Message = "Invalid username or password";
+                             });
+                     })"
+    >Login</button>
+</div>

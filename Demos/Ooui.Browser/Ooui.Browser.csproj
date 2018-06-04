@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <OutputType>exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ooui.Shared\Ooui.Shared.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Ooui.Wasm" Version="0.10.222" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebFiles Include="$(MSBuildThisFileDirectory)\..\Ooui.Web\wwwroot\**\*.*" />
+  </ItemGroup>
+  <Target Name="CopyWeb" AfterTargets="BuildDist">
+    <Copy SourceFiles="@(WebFiles)" DestinationFolder="$(OutputPath)\dist\%(RecursiveDir)" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300" />
+  </Target>
+</Project>
